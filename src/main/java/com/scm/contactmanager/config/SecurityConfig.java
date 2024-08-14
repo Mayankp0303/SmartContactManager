@@ -16,6 +16,6 @@ public class SecurityConfig {
         //This doesnt use db it only uses in memory check
         UserDetails user1 = User.withDefaultPasswordEncoder().username("test").password("test").build();
         UserDetails user2 = User.withDefaultPasswordEncoder().username("test2").password("test2").build();
-        return new InMemoryUserDetailsManager(user1,user2s);
+        return new InMemoryUserDetailsManager(user1,user2);
     }
 }
