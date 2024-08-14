@@ -32,12 +32,17 @@ public class PageController {
         return "home";
     }
 
+    @RequestMapping("/login")
+    public String home() {
+        return "login";
+    }
+
     @RequestMapping("/about")
     public String aboutPage() {
         return "about";
     }
 
-    @RequestMapping("/service")
+    @RequestMapping("/services")
     public String service(Model model) {
         model.addAttribute("name", "TEST value");
         return "services";

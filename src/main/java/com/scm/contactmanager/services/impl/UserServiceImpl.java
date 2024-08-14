@@ -6,8 +6,10 @@ import java.util.UUID;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.scm.contactmanager.entities.AppConstants;
 import com.scm.contactmanager.entities.User;
 import com.scm.contactmanager.helper.ResourceNotFoundExcepton;
 import com.scm.contactmanager.repositories.UserRepository;
@@ -21,6 +23,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passEncoder;
 
     @Override
     public User savUser(User user) {
@@ -28,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
+
+        user.setPassword(passEncoder.encode(user.getPassword()));
+
+        user.setRoles(List.of(AppConstants.ROLE_USER));
         return userRepository.save(user);
     }
 
@@ -58,9 +66,6 @@ public class UserServiceImpl implements UserService {
 
         User save =userRepository.save(user2);
         return Optional.ofNullable(save);
-
-
-
        
     }
 
