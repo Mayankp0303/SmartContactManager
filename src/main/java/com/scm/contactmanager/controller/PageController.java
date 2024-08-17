@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.scm.contactmanager.entities.User;
 import com.scm.contactmanager.forms.UserForm;
@@ -32,7 +33,7 @@ public class PageController {
         return "home";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(path = "/login" )
     public String home() {
         return "login";
     }

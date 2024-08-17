@@ -1,0 +1,38 @@
+.google-login-button {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    width: 100%;
+    justify-content: center;
+    text-decoration: none; /* Remove underline */
+}
+.google-login-button:hover {
+    background-color: #f1f1f1;
+    border-color: #c1c1c1;
+}
+.google-login-button:active {
+    background-color: #e0e0e0;
+}
+.google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.bg-primary-600 {
+    background-color: #2563eb; /* Tailwind Primary Blue */
+}
+.bg-primary-700 {
+    background-color: #1d4ed8; /* Darker Tailwind Primary Blue */
+}
+.text-primary-600 {
+    color: #2563eb; /* Tailwind Primary Blue */
+}
