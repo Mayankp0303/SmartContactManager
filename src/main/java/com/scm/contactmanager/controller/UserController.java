@@ -1,9 +1,14 @@
 package com.scm.contactmanager.controller;
 
+import java.security.Principal;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.scm.contactmanager.entities.Helper;
 
 
 @Controller
@@ -17,8 +22,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile", method=RequestMethod.GET)
-    public String profile() {
-        return "user/dashboard";
+    public String profile(Authentication authentication) {
+
+        String email = Helper.geEmailOfLoggedInUser(authentication);
+        return "user/profile";
     }
     
 }
