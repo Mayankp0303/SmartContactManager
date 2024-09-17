@@ -50,6 +50,7 @@ public class OauthSuccessHandler implements AuthenticationSuccessHandler {
                 if(regid.equals("google")){
                    
                     String email = oauthUser.getAttribute("email");
+                    System.out.println("Email is :" + email);
                     String name = oauthUser.getAttribute("name");
                     String picture = oauthUser.getAttribute("picture");
 

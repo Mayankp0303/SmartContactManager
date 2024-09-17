@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{:: #content})}">
-<head>
-    
-</head>
-<body>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>About Page</title>
+  </head>
+  <body>
     <div id="content">
-        <p>jnnjjjghgjhhghj</p>
+      <h1>Welcome to about page</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
+        ratione!
+      </p>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-</body>
+    <script>
+      console.log("about page");
+    </script>
+    <script>
+      console.log("second about page script");
+    </script>
+  </body>
 </html>
