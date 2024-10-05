@@ -39,3 +39,16 @@
     background: #fff; /* Match background color with the form's background */
     z-index: 2;
 }
+.navbar {
+    height: 64px; /* Set the height of your navbar */
+    background-color: #fff; /* Background color */
+    position: fixed;
+    width: 100%;
+    z-index: 10; /* Keeps navbar above other content */
+}
+
+#content {
+    margin-top: 64px; /* Match this with navbar height */
+    width: 100%;
+    padding: 16px; /* Add some padding for the content */
+}
