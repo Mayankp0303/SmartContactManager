@@ -29,7 +29,7 @@ public class Contact {
     private String description;
     private boolean favourite = false;
     @Column(length = 1000)
-    private String websiteLine;
+    private String websiteLink;
     @Column(length = 1000)
     private String linkedInLink;
 
