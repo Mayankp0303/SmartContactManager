@@ -16,10 +16,11 @@
     </div>
 
     <main class="flex-1 ml-64 p-4">
-        <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Add Contact Details</h2>
+        <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg overflow-y-auto" style="max-height: 90vh; max-width: 80vh;">
+            <h2 class="text-2xl  text-center font-semibold mb-4 text-gray-900 dark:text-white">Add Contact Details</h2>
 
-            <form class="max-w-md mx-auto" data-th-object="${contactform}" data-th-action="@{'/user/contact/add'}" method="post">
+            <div data-th-replace="message::messagebox"></div>
+            <form data-th-action="@{'/user/contact/addNew'}" class="max-w-md mx-auto" data-th-object="${contactform}" method="post" enctype="multipart/form-data">
                 <!-- For contact name -->
                 <label for="contact-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Name</label>
                 <div class="relative mb-4">
@@ -27,6 +28,7 @@
                         <i class="fa fa-address-book" aria-hidden="true"></i>
                     </div>
                     <input type="text" data-th-field="*{name}"  id="contact-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name">
+                    <p data-th-if="${#field.hasErrors('name')}" data-th-errors="*{name}">Invalid Name</p>
                 </div>
                 <!-- For contact email -->
                 <label for="contact-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Email</label>
@@ -35,6 +37,7 @@
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                     </div>
                     <input type="email" data-th-field="*{email}" id="contact-email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
+                    <p data-th-if="${#field.hasErrors('email')}" data-th-errors="*{email}">Invalid Email</p>
                 </div>
                 <!-- For Phone Number-->
                 <label for="contact-phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Phone Number</label>
@@ -43,6 +46,7 @@
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                     </div>
                     <input type="tel"data-th-field="*{phoneNumber}" id="contact-phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+91 89872872">
+                    <p data-th-if="${#field.hasErrors('phoneNumber')}" data-th-errors="*{phoneNumber}">Invalid PhoneNumber</p>
                 </div>
                 <!-- For contact address  -->
                 <label for="contact-address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Address</label>
@@ -53,12 +57,13 @@
                 <textarea id="contact-description"  data-th-field="*{description}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write about contact"></textarea>
 
                 <!-- For website -->
-                <label for="contact-website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website</label>
+                
+                <label for="contact-linkedin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">WebSite </label>
                 <div class="relative mb-4">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
                     </div>
-                    <input type="url" data-th-field="*{websitelink}" id="contact-website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="www.mywebsite.com">
+                    <input type="url" data-th-field="*{websiteLink}" id="contact-linkedin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="myportfolio.com">
                 </div>
                 <!-- For linkedin -->
                 <label for="contact-linkedin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LinkedIn Profile</label>
@@ -75,8 +80,8 @@
                 </div>
                 
                 <!--  For file upload -->
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                <label class=" pt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                <input data-th-field="*{picture}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
 
 
                 <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700">Add Contact</button>
