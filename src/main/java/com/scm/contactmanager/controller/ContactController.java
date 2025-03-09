@@ -1,6 +1,8 @@
 package com.scm.contactmanager.controller;
 
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.scm.contactmanager.forms.ContactForm;
 import com.scm.contactmanager.helper.Message;
 import com.scm.contactmanager.helper.MessageType;
 import com.scm.contactmanager.services.ContactService;
+import com.scm.contactmanager.services.ImageService;
 import com.scm.contactmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +38,9 @@ public class ContactController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping(path = "/add")
     public String addContactView(Model model){
@@ -63,6 +69,9 @@ public class ContactController {
         //Process image 
         LOGGER.info("file is coming " + contactform.getPicture().getOriginalFilename());
 
+        String filename = UUID.randomUUID().toString();
+        String fileurl =imageService.uploadImage(contactform.getPicture(),filename);
+        LOGGER.info("Check for file url " + fileurl);
 
         Contact contact = new Contact();
         contact.setFavourite(contactform.isFavourite());
@@ -74,7 +83,8 @@ public class ContactController {
         contact.setUser(user);
         contact.setLinkedInLink(contactform.getLinkedInLink());
         contact.setWebsiteLink(contactform.getWebsiteLink());
-        contactService.save(contact);
+        contact.setPicture(fileurl);
+        //contactService.save(contact);
         System.out.println(contactform);
 
         session.setAttribute("message", Message.builder().content("New Contact has been added").type(MessageType.green).build());
