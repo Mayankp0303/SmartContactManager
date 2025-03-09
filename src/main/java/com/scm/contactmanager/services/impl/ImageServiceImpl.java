@@ -18,6 +18,7 @@ import com.scm.contactmanager.services.ImageService;
 public class ImageServiceImpl implements ImageService {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(ImageServiceImpl.class); 
+    
     private Cloudinary cloudinary;
 
     public ImageServiceImpl(Cloudinary cloudinary){

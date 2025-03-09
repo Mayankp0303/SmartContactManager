@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -102,6 +103,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Cacheable
     public Optional<User> getUserByEmailId(String email) {
         
         return Optional.of(userRepository.findByEmail(email).orElse(null));

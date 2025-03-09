@@ -56,9 +56,13 @@ public class ContactController {
     public String saveContact( @Valid @ModelAttribute ContactForm contactform, BindingResult bindingResult,Authentication authentication,HttpSession session) {
         
         if(bindingResult.hasErrors()){
+            System.out.println(bindingResult);
             session.setAttribute("message", Message.builder().content("Form has some errors ").type(MessageType.red).build());
             return "user/add_contact";
         }
+        //test email from session object 
+        String testEmail = (String)session.getAttribute("userEmail");
+        System.out.println("Testing email fro msession attribute" +testEmail);
         //get email of logged in user from the auth 
         String email = Helper.getEmailOfLoggedInUser(authentication);
 
@@ -85,7 +89,9 @@ public class ContactController {
         contact.setWebsiteLink(contactform.getWebsiteLink());
         contact.setPicture(fileurl);
         //contactService.save(contact);
-        System.out.println(contactform);
+        System.out.println("Contact form data"+ contactform);
+
+        contactService.save(contact);
 
         session.setAttribute("message", Message.builder().content("New Contact has been added").type(MessageType.green).build());
         return "redirect:/user/contact/add";

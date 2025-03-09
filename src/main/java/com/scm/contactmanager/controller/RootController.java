@@ -7,12 +7,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.scm.contactmanager.entities.Helper;
 import com.scm.contactmanager.entities.User;
 import com.scm.contactmanager.services.UserService;
 
 @ControllerAdvice
+@SessionAttributes("loggedInUser")
 public class RootController {
 
     @Autowired

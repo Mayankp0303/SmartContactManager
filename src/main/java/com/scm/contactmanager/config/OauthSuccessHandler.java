@@ -30,6 +30,7 @@ public class OauthSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     private UserRepository userRepo;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
@@ -76,6 +77,7 @@ public class OauthSuccessHandler implements AuthenticationSuccessHandler {
                 }
 
                 boolean checkCreate = userRepo.findByEmail(createOUthUser.getEmail()).isPresent();
+                request.getSession().setAttribute("userEmail", createOUthUser.getEmail());
                 if(!checkCreate){
                     userRepo.save(createOUthUser);
                 }
